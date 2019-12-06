@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export class Search extends Component {
   state = {
     text: ''
+  };
+
+  static propTypes = {
+    searchUsers: PropTypes.func.isRequired
+  };
+
+  onSubmit = e => {
+    this.props.searchUsers(this.state.text);
+    this.setState({ text: '' });
+    e.preventDefault();
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -10,7 +21,7 @@ export class Search extends Component {
   render() {
     return (
       <div>
-        <form className='form'>
+        <form onSubmit={this.onSubmit} className='form'>
           <input
             type='text'
             name='text'
