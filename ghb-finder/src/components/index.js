@@ -1,3 +1,4 @@
+export { default as About } from './Pages/about';
 export { default as NavBar } from './layout/navbar';
 export { default as Alert } from './layout/alert';
 export { default as Users } from './users';

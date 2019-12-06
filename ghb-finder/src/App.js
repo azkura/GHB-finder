@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
-import { NavBar, Users, Search, Alert } from './components';
+import { NavBar, About, Users, Search, Alert } from './components';
 
 class App extends Component {
   state = {
@@ -48,6 +48,7 @@ class App extends Component {
           <div className='container'>
             <Alert alert={this.state.alert} />
             <Switch>
+              <Route exact path='/about' component={About} />
               <Route
                 path='/'
                 render={props => (
