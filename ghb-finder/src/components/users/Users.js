@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
-import UserItem from './UserItem';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export class Users extends Component {
-  render() {
-    const { users } = this.props;
+import UserItem from './UserItem';
+import { Spinner } from '../layout/Spinner';
+
+const Users = ({ users, loading }) => {
+  if (loading) {
+    return <Spinner />;
+  } else {
     return (
       <div style={userStyle}>
         {users.map(user => (
@@ -12,7 +16,13 @@ export class Users extends Component {
       </div>
     );
   }
-}
+};
+
+Users.prototypes = {
+  users: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired
+};
+
 const userStyle = {
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
