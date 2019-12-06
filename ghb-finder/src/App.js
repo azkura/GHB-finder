@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import { NavBar, Users } from './components';
+import { NavBar, Users, Search } from './components';
 
 class App extends Component {
   state = {
@@ -10,7 +10,6 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    console.log(process.env.REACT_APP_GHB_CLIENT_SECRET);
     this.setState({ loading: true });
     const res = await axios.get(
       `https://api.github.com/users?client_id=${process.env.REACT_APP_GHB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GHB_CLIENT_SECRET}`
@@ -23,6 +22,7 @@ class App extends Component {
       <div className='App'>
         <NavBar />
         <div className='container'>
+          <Search />
           <Users loading={this.state.loading} users={this.state.users} />
         </div>
       </div>
