@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
 import GithubContext from './githubContext';
-import { GithubReducer } from './githubReducer';
+import GithubReducer from './githubReducer';
 import {
   SEARCH_USERS,
   SET_LOADING,
@@ -21,6 +21,16 @@ const GithubState = props => {
   const [state, dispatch] = useReducer(GithubReducer, initialState);
 
   // Search Users
+  const searchUsers = async text => {
+    setLoading();
+    const res = await axios.get(
+      `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GHB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GHB_CLIENT_SECRET}`
+    );
+    dispatch({
+      type: SEARCH_USERS,
+      payload: res.data.items
+    });
+  };
 
   // Get User
 
@@ -29,6 +39,7 @@ const GithubState = props => {
   // Clear User
 
   // Set Loading
+  const setLoading = () => ({ type: SET_LOADING });
 
   return (
     <GithubContext.Provider
@@ -36,7 +47,8 @@ const GithubState = props => {
         users: state.users,
         user: state.user,
         repos: state.repos,
-        loading: state.loading
+        loading: state.loading,
+        searchUsers
       }}
     >
       {props.children}
