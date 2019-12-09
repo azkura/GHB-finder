@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import GithubState from './context/github/GithubState';
 import AlertState from './context/alert/AlertState';
 import './App.css';
-import { NavBar, About, Users, User, Search, Alert } from './components';
+import { NavBar, Home, About, User, Alert, NotFound } from './components';
 
 const App = () => {
   return (
@@ -17,15 +17,8 @@ const App = () => {
               <Switch>
                 <Route exact path='/about' component={About} />
                 <Route exact path='/user/:login' component={User} />
-                <Route
-                  path='/'
-                  render={props => (
-                    <Fragment>
-                      <Search />
-                      <Users />
-                    </Fragment>
-                  )}
-                />
+                <Route path='/' component={Home} />
+                <Route component={NotFound} />
               </Switch>
             </div>
           </div>
